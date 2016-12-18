@@ -1,0 +1,5 @@
+[Unit]
+Description = SmallSohoSolo Service
+
+[Service]
+ExecStart = /data/repo/solo_ci/solo-ci
