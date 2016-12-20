@@ -67,11 +67,10 @@ func (obj *ProjectController) Get() {
 	err := project.Get()
 	if err != nil {
 		obj.Data["json"] = utils.GetErrorRender(err.Error(),400)
-		obj.ServeJSON()
 	} else {
-		obj.Data["json"] = utils.GetSuccessRender(obj)
-		obj.ServeJSON()
+		obj.Data["json"] = utils.GetSuccessRender(project)
 	}
+	obj.ServeJSON()
 }
 
 func (obj *ProjectController) WebHook() {
