@@ -8,10 +8,11 @@ import (
 
 type Project struct {
 	Id        int `orm:"pk;auto;unique" json:"id"`
-	ProjectId string `json:"project_id" orm:"column(project_id)"`       //uuid
-	Name      string `json:"name" form:"name" orm:"column(name)"` //name
-	Type      string `json:"type" form:"type" orm:"column(type)"` //github,gitlab
-	Url       string `json:"url" form:"url" orm:"column(url)"`   //仓库地址
+	ProjectId string `json:"project_id"`       //uuid
+	Name      string `json:"name" form:"name"` //name
+	Type      string `json:"type" form:"type"` //github,gitlab
+	Url       string `json:"url" form:"url"`   //仓库地址
+	Path      string `json:"path" form:"path"`
 	Build     []*Build `orm:"reverse(many)" json:"-"`
 }
 
