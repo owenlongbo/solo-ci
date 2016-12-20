@@ -17,6 +17,14 @@ func GetSuccessRender(list interface{}) (*RenderStruct) {
 	return render
 }
 
+func GetErrorRender(message string, code int) (*RenderStruct) {
+	render := new(RenderStruct)
+	render.S = code
+	render.M = message
+	render.D = []string{}
+	return render
+}
+
 func GetClientErrRender() (*RenderStruct) {
 	render := new(RenderStruct)
 	render.S = 400
