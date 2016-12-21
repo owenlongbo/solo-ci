@@ -4,16 +4,21 @@ import (
 	"github.com/astaxie/beego/orm"
 	"errors"
 	"github.com/satori/go.uuid"
+	"solo-ci/interfaces"
+	"time"
+	"go/build"
 )
 
 type Project struct {
-	Id        int `orm:"pk;auto;unique" json:"id"`
-	ProjectId string `json:"project_id"`       //uuid
-	Name      string `json:"name" form:"name"` //name
-	Type      string `json:"type" form:"type"` //github,gitlab
-	Url       string `json:"url" form:"url"`   //仓库地址
-	Path      string `json:"path" form:"path"`
-	Build     []*Build `orm:"reverse(many)" json:"-"`
+	Id          int `orm:"pk;auto;unique" json:"id"`
+	ProjectId   string `json:"project_id"`           //uuid
+	Name        string `json:"name" form:"name"`     //name
+	Type        string `json:"type" form:"type"`     //github,gitlab
+	Url         string `json:"url" form:"url"`       //仓库地址
+	Path        string `json:"path" form:"path"`     //file 地址
+	Branch      string `json:"branch" form:"branch"` //分支
+	SecretToken string `json:"secret_token" form:"secret_token"`
+	Build       []*Build `orm:"reverse(many)" json:"-"`
 }
 
 // return  id,err

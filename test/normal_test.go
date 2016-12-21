@@ -2,10 +2,15 @@ package test
 
 import (
 	"testing"
-	"github.com/satori/go.uuid"
+	"os/exec"
+	"os"
+	"path"
+	"path/filepath"
 )
 
 func Test_NormalTest(t *testing.T) {
-	u1 := uuid.NewV1()
-	t.Log(u1)
+	execFileRelativePath, _ := exec.LookPath(os.Args[0])
+	execDirRelativePath, _ := path.Split(execFileRelativePath)
+	execDirAbsPath, _ := filepath.Abs(execDirRelativePath)
+	t.Log(execDirAbsPath)
 }
