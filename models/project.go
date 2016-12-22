@@ -4,9 +4,10 @@ import (
 	"github.com/astaxie/beego/orm"
 	"errors"
 	"github.com/satori/go.uuid"
-	"solo-ci/interfaces"
-	"time"
-	"go/build"
+	"os/exec"
+	"os"
+	"path"
+	"path/filepath"
 )
 
 type Project struct {
@@ -76,4 +77,14 @@ func (obj *Project) Get() (error) {
 		return nil
 	}
 	return nil
+}
+
+func GetWorkSpacePath(project *Project) (string) {
+	execFileRelativePath, _ := exec.LookPath(os.Args[0])
+	execDirRelativePath, _ := path.Split(execFileRelativePath)
+	execDirAbsPath, _ := filepath.Abs(execDirRelativePath)
+	if _, err := os.Stat(execDirAbsPath + "/workspace/" + project.Name); os.IsNotExist(err) {
+		os.Mkdir(execDirAbsPath + "/workspace/" + project.Name, 0766)
+	}
+	return execDirAbsPath + "/workspace/" + project.Name
 }

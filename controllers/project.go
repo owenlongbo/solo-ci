@@ -5,9 +5,7 @@ import (
 	"solo-ci/models"
 	"solo-ci/utils"
 	"fmt"
-	"errors"
 	"github.com/astaxie/beego/orm"
-	"debug/elf"
 	"io/ioutil"
 	"encoding/json"
 )
@@ -80,7 +78,7 @@ func (obj *ProjectController) WebHook() {
 	project := new(models.Project)
 	project.ProjectId = obj.Ctx.Input.Param(":project_id")
 	o := orm.NewOrm()
-	if err := o.Read(project); err != nil && project.Name == "" {
+	if err := o.Read(project, "project_id"); err != nil && project.Name == "" {
 		beego.Info("This object", project.ProjectId, "not exist")
 		return
 	}
@@ -89,13 +87,15 @@ func (obj *ProjectController) WebHook() {
 		gitlabHook := new(models.GitlabHook)
 		bodyMsg, _ := ioutil.ReadAll(obj.Ctx.Request.Body)
 		json.Unmarshal(bodyMsg, gitlabHook)
-		if project.SecretToken != "" && obj.Ctx.Request.Header.Get("X-Gitlab-Token") != project.SecretToken {
-			beego.Info(project.ProjectId,"Secret token error")
+		if gitlabHook.Ref != "refs/heads/" + project.Branch {
+			beego.Info("Branch not same")
 			return
 		}
-		build := models.NewBuild(project)
-		o := orm.NewOrm()
-		o.Insert(build)
+		if project.SecretToken != "" && obj.Ctx.Request.Header.Get("X-Gitlab-Token") != project.SecretToken {
+			beego.Info(project.ProjectId, "Secret token error")
+			return
+		}
+		go models.NewBuild(project)
 	case "github":
 		beego.Info("This type will support in next version")
 	case "bitbucket":

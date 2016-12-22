@@ -8,7 +8,6 @@ import (
 )
 
 func init() {
-	orm.Debug = true
 	orm.RegisterDriver("sqlite3", orm.DRSqlite)
 	orm.RegisterDataBase("default", "sqlite3", "data/data.db")
 	orm.DefaultTimeLoc = time.UTC

@@ -2,9 +2,8 @@ package main
 
 import (
 	"github.com/astaxie/beego"
-	_ "solo-ci/models"
-	_ "solo-ci/routers"
 	"os"
+	_ "solo-ci/routers"
 	"solo-ci/conf"
 	"os/exec"
 )
@@ -12,7 +11,7 @@ import (
 func main() {
 	//创建工作区
 	if _, err := os.Stat("workspace"); os.IsNotExist(err) {
-		os.Mkdir("workspace", os.ModeDir)
+		os.Mkdir("workspace", 0766)
 	}
 	//检查git
 	_, err := exec.Command("git", "--version").CombinedOutput()
@@ -28,5 +27,6 @@ func main() {
 	if conf.GOROOT == "" {
 		beego.Info("GOROOT not set")
 	}
+	beego.Info("check success!")
 	beego.Run()
 }
