@@ -13,6 +13,7 @@ func init() {
 		beego.NSRouter("/project/:project_id",&controllers.ProjectController{},"delete:Delete"),
 		beego.NSRouter("/project/:project_id",&controllers.ProjectController{},"put:Update"),
 		beego.NSRouter("/project/:project_id",&controllers.ProjectController{},"get:Get"),
+		beego.NSRouter("/project",&controllers.ProjectController{},"get:GetList"),
 	)
 	beego.AddNamespace(ns)
 	beego.ErrorHandler("404", func(w http.ResponseWriter, r *http.Request) {

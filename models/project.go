@@ -79,6 +79,14 @@ func (obj *Project) Get() (error) {
 	return nil
 }
 
+func GetList(page int,pageSize int)([]*Project) {
+	qs := orm.NewOrm().QueryTable("project")
+	qs = qs.Limit(pageSize,page)
+	var list []*Project
+	qs.All(&list)
+	return list
+}
+
 func GetWorkSpacePath(project *Project) (string) {
 	execFileRelativePath, _ := exec.LookPath(os.Args[0])
 	execDirRelativePath, _ := path.Split(execFileRelativePath)

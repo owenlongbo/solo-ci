@@ -70,6 +70,13 @@ func (obj *ProjectController) Get() {
 	obj.ServeJSON()
 }
 
+func (obj *ProjectController) GetList() {
+	page, _ := obj.GetInt("page", 0)
+	pageSize, _ := obj.GetInt("pageSize", 20)
+	obj.Data["json"] = utils.GetSuccessRender(models.GetList(page, pageSize))
+	obj.ServeJSON()
+}
+
 func (obj *ProjectController) WebHook() {
 	//告诉git 接受成功
 	obj.Data["json"] = utils.GetSuccessRender(nil)
