@@ -57,6 +57,21 @@ func NewBuild(project *Project) {
 		saveBuild(build, false, errConfig, result)
 		return
 	}
+	fmt.Println(buildConfig)
+	//BeforeScript
+	if buildConfig.BeforeScript != "" {
+		in := bytes.NewBuffer(nil)
+		cmd := exec.Command("sh")
+		cmd.Stdin = in
+		in.WriteString("cd " + buildPath + "\n")
+		in.WriteString(buildConfig.BeforeScript)
+		beforeResp, errBefore := cmd.CombinedOutput()
+		if errBefore != nil {
+			saveBuild(build, false, errBefore, result)
+			return
+		}
+		result.Write(beforeResp)
+	}
 	//exec config
 	getList := make([]*exec.Cmd, len(buildConfig.GetList))
 	for index, pack := range buildConfig.GetList {
@@ -104,6 +119,7 @@ func NewBuild(project *Project) {
 		in := bytes.NewBuffer(nil)
 		cmd := exec.Command("sh")
 		cmd.Stdin = in
+		in.WriteString("cd " + buildPath + "\n")
 		in.WriteString(buildConfig.AfterScript)
 		afterResp, errAfter := cmd.CombinedOutput()
 		if errAfter != nil {
