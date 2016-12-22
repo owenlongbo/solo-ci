@@ -42,7 +42,7 @@ POST    http://your-ip:13233/v1/solohook/:project_id  触发Webhook
 
 POST    http://your-ip:13233/v1/project 
 
-Params
+Params in form
 
 - name
 - type
@@ -51,11 +51,18 @@ Params
 - branch
 - secret_token (非必要)
 
-DELETE   http://your-ip:13233/v1/project/:project_id     删除项目
+DELETE      http://your-ip:13233/v1/project/:project_id     删除项目
 
 PUT         http://your-ip:13233/v1/project/:project_id     更新项目
 
 GET         http://your-ip:13233/v1/project/:project_id     获取项目信息
+
+GET         http://your-ip:13233/v1/project                 获取项目列表
+   
+Params in query
+
+- page (default 0)
+- pageSize (default 20)
 
 ### solo-ci.json
 
