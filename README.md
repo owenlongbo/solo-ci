@@ -23,8 +23,8 @@
 - 配置要求远低于主流CI工具（Jenkins etc.）内存占用低，可以运行在任何配置Linux主机中
 - 一键开启，只需要Golang环境和Git环境，程序会自动获取自己所需要的环境
 - 配制简单，只有四个配置项
-- 一键clone，build，打包成tar，只需要写个SSH脚本部署到自己的机器即可
-- 支持自定义脚本，构建前构建后触发均可自定义
+- 一键clone，build，test，打包成tar
+- 支持自定义脚本，构建前构建后触发均可自定义，脚本执行目录为当前构建目录
 - REST API支持，可以集成进任何系统
 - 可以保存任意数量的构建，不丢任何构建
 
@@ -38,33 +38,30 @@
 
 ### REST API###
 
-POST    http://your-ip:13233/v1/solohook/:project_id  触发Webhook
+| Method | Url                                      | Params                                   | Description |
+| :----: | :--------------------------------------- | :--------------------------------------- | :---------- |
+|  POST  | http://your-ip:13233/v1/solohook/:project_id | - project_id(path)                       | 触发Webhook   |
+|  POST  | http://your-ip:13233/v1/project          | - name(form)                             | 创建项目        |
+|        |                                          | - type(form, gitlab or github or bitbucket) |             |
+|        |                                          | - url(form)                              |             |
+|        |                                          | - path(form，the position of solo-ci.json) |             |
+|        |                                          | - branch(form)                           |             |
+|        |                                          | - secret_token(form,not necessary)       |             |
+|        |                                          | - main_path(form,the position of main.go) |             |
+| DELETE | http://your-ip:13233/v1/project/:project_id | - project_id(path)                       | 删除项目        |
+|  PUT   | http://your-ip:13233/v1/project/:project_id | - project_id(path)                       | 更新项目        |
+|        |                                          | - name(form)                             |             |
+|        |                                          | - type(form, gitlab or github or bitbucket) |             |
+|        |                                          | - url(form)                              |             |
+|        |                                          | - path(form，the position of solo-ci.json) |             |
+|        |                                          | - branch(form)                           |             |
+|        |                                          | - secret_token(form,not necessary)       |             |
+|  GET   | http://your-ip:13233/v1/project/:project_id | - project_id(path)                       | 获取项目信息      |
+|  GET   | http://your-ip:13233/v1/project          | - project_id(path)                       | 获取项目列表      |
+|        |                                          | - page (default 0)                       |             |
+|        |                                          | - pageSize(default 20)                   |             |
 
-POST    http://your-ip:13233/v1/project 
-
-Params in form
-
-- name
-- type
-- url
-- path
-- branch
-- secret_token (非必要)
-
-DELETE      http://your-ip:13233/v1/project/:project_id     删除项目
-
-PUT         http://your-ip:13233/v1/project/:project_id     更新项目
-
-GET         http://your-ip:13233/v1/project/:project_id     获取项目信息
-
-GET         http://your-ip:13233/v1/project                 获取项目列表
-   
-Params in query
-
-- page (default 0)
-- pageSize (default 20)
-
-### solo-ci.json
+### 配置文件solo-ci.json
 
 - get_list：需要下载的Go包
 - zip_list：构建完成需要打包进项目的文件或者目录

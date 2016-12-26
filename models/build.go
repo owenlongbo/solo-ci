@@ -33,13 +33,12 @@ func NewBuild(project *Project) {
 	build := new(Build)
 	build.Project = project
 	build.Name = time.Now().Format("2006-01-02T15:04:05.000Z")
-	var result bytes.Buffer
 	buildPath := getBuildPath(project, build)
+	var result bytes.Buffer
 	//git clone
-	gitResp, errGit := getResult([]*exec.Cmd{
+	errGit := RunScript(result, []*exec.Cmd{
 		exec.Command(conf.GIT_PATH, "clone", "-b", project.Branch, project.Url, buildPath),
 	})
-	result.WriteString(gitResp)
 	if errGit != nil {
 		saveBuild(build, false, errGit, result)
 		return
@@ -77,21 +76,21 @@ func NewBuild(project *Project) {
 	for index, pack := range buildConfig.GetList {
 		getList[index] = exec.Command(conf.GOROOT + "/bin/go", "get", pack)
 	}
-	getResp, errGet := getResult(getList)
-	result.WriteString(getResp)
+	errGet := RunScript(result, getList)
 	if errGet != nil {
 		beego.Error(errGet.Error())
 		saveBuild(build, false, errGet, result)
 		return
 	}
 	//exec build and clean
-	buildResp, errBuild := getResult([]*exec.Cmd{
+	errBuild := RunScript(result, []*exec.Cmd{
 		exec.Command("ln", "-s", buildPath, conf.GOPATH + "/src"),
-		exec.Command(conf.GOROOT + "/bin/go", "build", "-o", buildPath + "/" + project.Name),
-		exec.Command(conf.GOROOT + "/bin/go", "clean"),
+		exec.Command(conf.GOROOT + "/bin/go", "build", build.Name),
+		exec.Command(conf.GOROOT + "/bin/go", "clean", build.Name),
+		exec.Command(conf.GOROOT + "/bin/go", "test", build.Name),
+		exec.Command("mv", build.Name, "workspace/" + project.Name + "/" + build.Name + "/" + project.Name),
 		exec.Command("rm", conf.GOPATH + "/src/" + build.Name),
 	})
-	result.WriteString(buildResp)
 	if errBuild != nil {
 		saveBuild(build, false, errBuild, result)
 		return
@@ -104,8 +103,7 @@ func NewBuild(project *Project) {
 		for index, pack := range buildConfig.ZipList {
 			zipList[index] = exec.Command("cp", "-R", buildPath + "/" + pack, buildPath + "/pack-" + project.Name + "/")
 		}
-		zipResp, errZip := getResult(zipList)
-		result.WriteString(zipResp)
+		errZip := RunScript(result, zipList)
 		if errZip != nil {
 			saveBuild(build, false, errZip, result)
 			return
@@ -138,17 +136,16 @@ func getBuildPath(project *Project, build *Build) (string) {
 	return workSpace + "/" + build.Name
 }
 
-func getResult(cmdList []*exec.Cmd) (string, error) {
-	var buffer bytes.Buffer
+func RunScript(result bytes.Buffer, cmdList []*exec.Cmd) (error) {
 	for _, cmd := range cmdList {
 		out, err := cmd.CombinedOutput()
-		buffer.Write(out)
+		result.Write(out)
 		if err != nil {
-			buffer.WriteString(err.Error())
-			return buffer.String(), err
+			result.WriteString(err.Error())
+			return err
 		}
 	}
-	return buffer.String(), nil
+	return nil
 }
 
 func getFileData(project *Project, build *Build) ([]byte, error) {
