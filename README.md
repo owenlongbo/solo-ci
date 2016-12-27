@@ -37,6 +37,7 @@ A lieghtweight golang CI/CD tools, you only need write a simple config, it will 
 3. Use REST API new a ci project
 4. Write a config and configure your webhook
 5. push!
+6. The Build will save at workspace dir.
 
 ### REST API###
 

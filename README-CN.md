@@ -35,6 +35,7 @@
 3. 使用REST API新建项目
 4. 在你的项目中写个简单的solo.json，并且在代码管理中配置webhook (配置地址请看REST API)
 5. push！触发CI
+6. 构建好的程序会存在workspace文件夹中
 
 ### REST API###
 
