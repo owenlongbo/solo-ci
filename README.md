@@ -1,5 +1,7 @@
 # Solo CI
 
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/solo-ci/Lobby)
+
 ### Description###
 
 [中文版](README-CN.md)

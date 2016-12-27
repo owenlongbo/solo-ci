@@ -1,5 +1,7 @@
 # Solo CI
 
+![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/solo-ci/Lobby)
+
 ### Description###
 
 一个轻量级的Golang CI/CD工具，全自动clone代码，构建，部署，只需要几行配置即可
