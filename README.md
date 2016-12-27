@@ -21,9 +21,9 @@ A lieghtweight golang CI/CD tools, you only need write a simple config, it will 
 
 ### Features###
 
-- Support Gitlab，Github（future），Bitbucket（future）webhook
-- Only need very small memory and cpu（Jenkins etc.），it can run on every Linux host
-- You only to need start it ,it will get the env auto.
+- Support Gitlab, Github(future), Bitbucket(future) webhook
+- Only need very small memory and cpu, it can run on every Linux host
+- You only need to start it ,it will get the env auto.
 - The simple config, if you want, you don't need to write it.
 - Auto clone, buil, test, clean, tar
 - Support after script and before script, it will run on the project path
