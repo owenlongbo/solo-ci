@@ -6,7 +6,7 @@
 
 [中文版](README-CN.md)
 
-A lieghtweight golang CI/CD tools, you only need write a simple config, it will clone, build, test, deploy
+A lightweight golang CI/CD tools, you only need write a simple config, it will clone, build, test, deploy
 
 ```json
 {
