@@ -1,6 +1,6 @@
 # Solo CI
 
-![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/solo-ci/Lobby)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/solo-ci/Lobby)
 
 ### Description###
 
