@@ -23,7 +23,7 @@ A lightweight golang CI/CD tools, you only need write a simple config, it will c
 
 ### Features###
 
-- Support Gitlab, Github(future), Bitbucket(future) webhook
+- Support Gitlab, Github webhook
 - Only need very small memory and cpu, it can run on every Linux host
 - You only need to start it ,it will get the env auto.
 - The simple config, if you want, you don't need to write it.
@@ -84,4 +84,3 @@ If you don't want to write a config, you can write a blank config.
 ### Next###
 
 - Support Web GUI
-- Support Github，Bitbucket
