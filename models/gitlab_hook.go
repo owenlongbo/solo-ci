@@ -1,5 +1,6 @@
 package models
 
+//Gitlab config
 type GitlabHook struct {
 	ObjectKind string `json:"object_kind"`
 	EventName  string `json:"event_name"`

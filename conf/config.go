@@ -1,6 +1,6 @@
 package conf
 
-var GOROOT = "/usr/local/go"
-var GOPATH = "/Users/longlong/mydata/software/gopath"
+var GOROOT = ""
+var GOPATH = ""
 
-var GIT_PATH = "/usr/local/bin/git"
+var GIT_PATH = ""
