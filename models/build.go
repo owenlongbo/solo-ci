@@ -37,7 +37,7 @@ func NewBuild(project *Project) {
 	var result bytes.Buffer
 	//git clone
 	errGit := RunScript(result, []*exec.Cmd{
-		exec.Command(conf.GIT_PATH, "clone", "-b", project.Branch, project.Url, buildPath),
+		exec.Command("git", "clone", "-b", project.Branch, project.Url, buildPath),
 	})
 	if errGit != nil {
 		saveBuild(build, false, errGit, result)

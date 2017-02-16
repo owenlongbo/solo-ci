@@ -105,18 +105,18 @@ func (obj *ProjectController) WebHook() {
 		}
 		go models.NewBuild(project)
 	case "github":
-		githubHook := new(models.GithubHook)
-		bodyMsg, _ := ioutil.ReadAll(obj.Ctx.Request.Body)
-		beego.Info(string(bodyMsg))
-		json.Unmarshal(bodyMsg, githubHook)
-		if githubHook.Ref != "refs/heads/" + project.Branch {
-			beego.Info("Branch not same")
-			return
-		}
-		if project.SecretToken != "" && obj.Ctx.Request.Header.Get("X-Hub-Signature") != project.SecretToken {
-			beego.Info(project.ProjectId, "Secret token error")
-			return
-		}
+		//githubHook := new(models.GithubHook)
+		//bodyMsg, _ := ioutil.ReadAll(obj.Ctx.Request.Body)
+		//beego.Info(string(bodyMsg))
+		//json.Unmarshal(bodyMsg, githubHook)
+		//if githubHook.Ref != "refs/heads/" + project.Branch {
+		//	beego.Info("Branch not same")
+		//	return
+		//}
+		//if project.SecretToken != "" && obj.Ctx.Request.Header.Get("X-Hub-Signature") != project.SecretToken {
+		//	beego.Info(project.ProjectId, "Secret token error")
+		//	return
+		//}
 		go models.NewBuild(project)
 	default:
 		beego.Info("Don't have this type")
