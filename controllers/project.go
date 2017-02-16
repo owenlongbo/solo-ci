@@ -8,6 +8,7 @@ import (
 	"github.com/astaxie/beego/orm"
 	"io/ioutil"
 	"encoding/json"
+	"net/http/httputil"
 )
 
 type ProjectController struct {
@@ -106,8 +107,9 @@ func (obj *ProjectController) WebHook() {
 	case "github":
 		githubHook := new(models.GithubHook)
 		bodyMsg, _ := ioutil.ReadAll(obj.Ctx.Request.Body)
+		jjj, _ := httputil.DumpRequest(obj.Ctx.Request, true)
 		json.Unmarshal(bodyMsg, githubHook)
-		beego.Info(string(bodyMsg))
+		beego.Info(string(jjj))
 		if githubHook.Ref != "refs/heads/" + project.Branch {
 			beego.Info("Branch not same")
 			return
