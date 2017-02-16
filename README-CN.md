@@ -34,7 +34,7 @@
 
 1. go get github.com/astaxie/beego  go get github.com/mattn/go-sqlite3  go get github.com/satori/go.uuid
 2. 配置好主机的GOPATH，GOROOT，GIT环境 
-3. 编译solo-ci
+3. 下载编译好的二进制
 4. 使用REST API新建项目
 5. 在你的项目中写个简单的solo.json，并且在代码管理中配置webhook (配置地址请看REST API)
 6. push！触发CI

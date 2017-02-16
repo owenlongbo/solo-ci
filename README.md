@@ -36,7 +36,7 @@ A lightweight golang CI/CD tools, you only need write a simple config, it will c
 
 1. go get github.com/astaxie/beego  go get github.com/mattn/go-sqlite3  go get github.com/satori/go.uuid
 2. GOPATH，GOROOT，GIT
-3. Build solo-ci source
+3. Download solo-ci binary
 4. Use REST API new a ci project
 5. Write a config and configure your webhook
 6. push!
