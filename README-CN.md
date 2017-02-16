@@ -21,7 +21,7 @@
 
 ### Features###
 
-- 完美集成Gitlab，Github
+- 完美集成Gitlab，Github（application/json）
 - 配置要求远低于主流CI工具（Jenkins etc.）内存占用低，可以运行在任何配置Linux主机中
 - 一键开启，只需要Golang环境和Git环境，程序会自动获取自己所需要的环境
 - 配制简单，只有四个配置项
