@@ -85,8 +85,7 @@ func NewBuild(project *Project) {
 	//exec build and clean
 	errBuild := RunScript(result, []*exec.Cmd{
 		exec.Command("ln", "-s", buildPath, conf.GOPATH + "/src"),
-		exec.Command(conf.GOROOT + "/bin/go", "build", project.Name),
-		exec.Command("mv", project.Name, build.Name),
+		exec.Command(conf.GOROOT + "/bin/go", "build", "-o", build.Name, project.MainPath),
 		exec.Command(conf.GOROOT + "/bin/go", "clean", build.Name),
 		exec.Command(conf.GOROOT + "/bin/go", "test", build.Name),
 		exec.Command("mv", build.Name, "workspace/" + project.Name + "/" + build.Name + "/" + project.Name),
