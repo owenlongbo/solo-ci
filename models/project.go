@@ -18,6 +18,7 @@ type Project struct {
 	Url         string `json:"url" form:"url"`       //仓库地址
 	Path        string `json:"path" form:"path"`     //file 地址
 	Branch      string `json:"branch" form:"branch"` //分支
+	MainPath    string `json:"main_path" form:"main_path"` //main 文件地址
 	SecretToken string `json:"secret_token" form:"secret_token"`
 	Build       []*Build `orm:"reverse(many)" json:"-"`
 }
@@ -79,9 +80,9 @@ func (obj *Project) Get() (error) {
 	return nil
 }
 
-func GetList(page int,pageSize int)([]*Project) {
+func GetList(page int, pageSize int) ([]*Project) {
 	qs := orm.NewOrm().QueryTable("project")
-	qs = qs.Limit(pageSize,page)
+	qs = qs.Limit(pageSize, page)
 	var list []*Project
 	qs.All(&list)
 	return list
