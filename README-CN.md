@@ -32,12 +32,13 @@
 
 ### Use###
 
-1. 配置好主机的GOPATH，GOROOT，GIT环境 
-2. 下载solo-ci编译好的程序
-3. 使用REST API新建项目
-4. 在你的项目中写个简单的solo.json，并且在代码管理中配置webhook (配置地址请看REST API)
-5. push！触发CI
-6. 构建好的程序会存在workspace文件夹中
+1. go get github.com/astaxie/beego  go get github.com/mattn/go-sqlite3  go get github.com/satori/go.uuid
+2. 配置好主机的GOPATH，GOROOT，GIT环境 
+3. 编译solo-ci
+4. 使用REST API新建项目
+5. 在你的项目中写个简单的solo.json，并且在代码管理中配置webhook (配置地址请看REST API)
+6. push！触发CI
+7. 构建好的程序会存在workspace文件夹中
 
 ### REST API###
 
