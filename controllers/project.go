@@ -93,6 +93,7 @@ func (obj *ProjectController) WebHook() {
 	case "gitlab":
 		gitlabHook := new(models.GitlabHook)
 		bodyMsg, _ := ioutil.ReadAll(obj.Ctx.Request.Body)
+		beego.Debug(string(bodyMsg))
 		json.Unmarshal(bodyMsg, gitlabHook)
 		if gitlabHook.Ref != "refs/heads/" + project.Branch {
 			beego.Info("Branch not same")
@@ -106,6 +107,7 @@ func (obj *ProjectController) WebHook() {
 	case "github":
 		githubHook := new(models.GithubHook)
 		bodyMsg, _ := ioutil.ReadAll(obj.Ctx.Request.Body)
+		beego.Debug(string(bodyMsg))
 		json.Unmarshal(bodyMsg, githubHook)
 		if githubHook.Ref != "refs/heads/" + project.Branch {
 			beego.Info("Branch not same")

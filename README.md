@@ -56,7 +56,7 @@ A lightweight golang CI/CD tools, you only need write a simple config, it will c
 | DELETE | http://your-ip:13233/v1/project/:project_id | - project_id(path)                       | Delete project   |
 |  PUT   | http://your-ip:13233/v1/project/:project_id | - project_id(path)                       | Update Project   |
 |        |                                          | - name(form)                             |                  |
-|        |                                          | - type(form, gitlab or github or bitbucket) |                  |
+|        |                                          | - type(form, gitlab or github) |                  |
 |        |                                          | - url(form)                              |                  |
 |        |                                          | - path(form，the position of solo-ci.json) |                  |
 |        |                                          | - branch(form)                           |                  |

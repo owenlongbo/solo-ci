@@ -54,7 +54,7 @@
 | DELETE | http://your-ip:13233/v1/project/:project_id | - project_id(path)                       | 删除项目        |
 |  PUT   | http://your-ip:13233/v1/project/:project_id | - project_id(path)                       | 更新项目        |
 |        |                                          | - name(form)                             |             |
-|        |                                          | - type(form, gitlab or github or bitbucket) |             |
+|        |                                          | - type(form, gitlab or github) |             |
 |        |                                          | - url(form)                              |             |
 |        |                                          | - path(form，the position of solo-ci.json) |             |
 |        |                                          | - branch(form)                           |             |
