@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/astaxie/beego"
 	"os"
-	_ "solo-ci/routers"
-	"solo-ci/conf"
 	"os/exec"
+	"github.com/astaxie/beego"
+	"solo-ci/conf"
+	_ "solo-ci/routers"
 )
 
 func main() {
