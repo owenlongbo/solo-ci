@@ -107,7 +107,7 @@ func (obj *ProjectController) WebHook() {
 	case "github":
 		githubHook := new(models.GithubHook)
 		bodyMsg, _ := ioutil.ReadAll(obj.Ctx.Request.Body)
-		jjj, _ := httputil.DumpRequest(obj.Ctx.Request, true)
+		jjj, _ := httputil.DumpRequestOut(obj.Ctx.Request, true)
 		json.Unmarshal(bodyMsg, githubHook)
 		beego.Info(string(jjj))
 		if githubHook.Ref != "refs/heads/" + project.Branch {
