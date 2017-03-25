@@ -2,7 +2,7 @@
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/solo-ci/Lobby)
 
-### Description###
+### Description
 
 [中文版](README-CN.md)
 
@@ -21,7 +21,7 @@ A lightweight golang CI/CD tools, you only need write a simple config, it will c
 }
 ```
 
-### Features###
+### Features
 
 - Support Gitlab, Github（application/json） webhook
 - Only need very small memory and cpu, it can run on every Linux host
@@ -32,7 +32,7 @@ A lightweight golang CI/CD tools, you only need write a simple config, it will c
 - Support REST API
 - Every build will be saved
 
-### Use###
+### Use
 
 1. go get github.com/astaxie/beego  go get github.com/mattn/go-sqlite3  go get github.com/satori/go.uuid
 2. GOPATH，GOROOT，GIT
@@ -42,7 +42,7 @@ A lightweight golang CI/CD tools, you only need write a simple config, it will c
 6. push!
 7. The Build will save at workspace dir.
 
-### REST API###
+### REST API
 
 | Method | Url                                      | Params                                   | Description      |
 | :----: | :--------------------------------------- | :--------------------------------------- | :--------------- |
@@ -82,6 +82,7 @@ If you don't want to write a config, you can write a blank config.
 }
 ```
 
-### Next###
+### Next
 
 - Support Web GUI
+

@@ -2,7 +2,7 @@
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/solo-ci/Lobby)
 
-### Description###
+### Description
 
 一个轻量级的Golang CI/CD工具，全自动clone代码，构建，部署，只需要几行配置即可
 
@@ -19,7 +19,7 @@
 }
 ```
 
-### Features###
+### Features
 
 - 完美集成Gitlab，Github（application/json）
 - 配置要求远低于主流CI工具（Jenkins etc.）内存占用低，可以运行在任何配置Linux主机中
@@ -30,7 +30,7 @@
 - REST API支持，可以集成进任何系统
 - 可以保存任意数量的构建，不丢任何构建
 
-### Use###
+### Use
 
 1. go get github.com/astaxie/beego  go get github.com/mattn/go-sqlite3  go get github.com/satori/go.uuid
 2. 配置好主机的GOPATH，GOROOT，GIT环境 
@@ -40,7 +40,7 @@
 6. push！触发CI
 7. 构建好的程序会存在workspace文件夹中
 
-### REST API###
+### REST API
 
 | Method | Url                                      | Params                                   | Description |
 | :----: | :--------------------------------------- | :--------------------------------------- | :---------- |
@@ -80,6 +80,7 @@
 }
 ```
 
-### Next###
+### Next
 
 - Web GUI 支持
+
