@@ -41,6 +41,7 @@ A lightweight golang CI/CD tools, you only need write a simple config, it will c
 5. Write a config and configure your webhook
 6. push!
 7. The Build will save at workspace dir.
+8. go-sqlite3 requires gcc pre-installed. use "sudo apt-get install build-essential" to install gcc if necessary
 
 ### REST API
 
@@ -78,11 +79,10 @@ If you don't want to write a config, you can write a blank config.
 
 ```json
 {
-  
+
 }
 ```
 
 ### Next
 
 - Support Web GUI
-

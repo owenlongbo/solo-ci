@@ -1,31 +1,33 @@
 package models
 
 import (
-	"github.com/astaxie/beego/orm"
 	"errors"
-	"github.com/satori/go.uuid"
-	"os/exec"
 	"os"
+	"os/exec"
 	"path"
 	"path/filepath"
+
+	"github.com/astaxie/beego/orm"
+	"github.com/satori/go.uuid"
 )
 
 type Project struct {
-	Id          int `orm:"pk;auto;unique" json:"id"`
-	ProjectId   string `json:"project_id"`           //uuid
-	Name        string `json:"name" form:"name"`     //name
-	Type        string `json:"type" form:"type"`     //github,gitlab
-	Url         string `json:"url" form:"url"`       //仓库地址
-	Path        string `json:"path" form:"path"`     //file 地址
-	Branch      string `json:"branch" form:"branch"` //分支
-	MainPath    string `json:"main_path" form:"main_path"` //main 文件地址
-	SecretToken string `json:"secret_token" form:"secret_token"`
+	Id          int      `orm:"pk;auto;unique" json:"id"`
+	ProjectId   string   `json:"project_id"`                 //uuid
+	Name        string   `json:"name" form:"name"`           //name
+	Type        string   `json:"type" form:"type"`           //github,gitlab
+	Url         string   `json:"url" form:"url"`             //仓库地址
+	Path        string   `json:"path" form:"path"`           //file 地址
+	Branch      string   `json:"branch" form:"branch"`       //分支
+	MainPath    string   `json:"main_path" form:"main_path"` //main 文件地址
+	SecretToken string   `json:"secret_token" form:"secret_token"`
 	Build       []*Build `orm:"reverse(many)" json:"-"`
 }
 
 // return  id,err
 func (obj *Project) Add() (string, error) {
-	u := uuid.NewV1()
+	//tiny bug fix here, should handle err
+	u, _ := uuid.NewV1()
 	obj.ProjectId = u.String()
 	o := orm.NewOrm()
 	qs := o.QueryTable("project")
@@ -46,7 +48,7 @@ func (obj *Project) Add() (string, error) {
 }
 
 //return id,err
-func (obj *Project) Delete() (error) {
+func (obj *Project) Delete() error {
 	o := orm.NewOrm()
 	_, err := o.Delete(obj)
 	if err != nil {
@@ -57,7 +59,7 @@ func (obj *Project) Delete() (error) {
 }
 
 //return isSuccess,err
-func (obj *Project) Update() (error) {
+func (obj *Project) Update() error {
 	o := orm.NewOrm()
 	_, err := o.Update(obj)
 	if err != nil {
@@ -68,7 +70,7 @@ func (obj *Project) Update() (error) {
 }
 
 //return obj list,err
-func (obj *Project) Get() (error) {
+func (obj *Project) Get() error {
 	o := orm.NewOrm()
 	qs := o.QueryTable(obj)
 	err := qs.One(obj)
@@ -80,7 +82,7 @@ func (obj *Project) Get() (error) {
 	return nil
 }
 
-func GetList(page int, pageSize int) ([]*Project) {
+func GetList(page int, pageSize int) []*Project {
 	qs := orm.NewOrm().QueryTable("project")
 	qs = qs.Limit(pageSize, page)
 	var list []*Project
@@ -88,12 +90,12 @@ func GetList(page int, pageSize int) ([]*Project) {
 	return list
 }
 
-func GetWorkSpacePath(project *Project) (string) {
+func GetWorkSpacePath(project *Project) string {
 	execFileRelativePath, _ := exec.LookPath(os.Args[0])
 	execDirRelativePath, _ := path.Split(execFileRelativePath)
 	execDirAbsPath, _ := filepath.Abs(execDirRelativePath)
 	if _, err := os.Stat(execDirAbsPath + "/workspace/" + project.Name); os.IsNotExist(err) {
-		os.Mkdir(execDirAbsPath + "/workspace/" + project.Name, 0766)
+		os.Mkdir(execDirAbsPath+"/workspace/"+project.Name, 0766)
 	}
 	return execDirAbsPath + "/workspace/" + project.Name
 }

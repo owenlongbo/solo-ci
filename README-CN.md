@@ -33,12 +33,13 @@
 ### Use
 
 1. go get github.com/astaxie/beego  go get github.com/mattn/go-sqlite3  go get github.com/satori/go.uuid
-2. 配置好主机的GOPATH，GOROOT，GIT环境 
+2. 配置好主机的GOPATH，GOROOT，GIT环境
 3. 下载编译好的二进制
 4. 使用REST API新建项目
 5. 在你的项目中写个简单的solo.json，并且在代码管理中配置webhook (配置地址请看REST API)
 6. push！触发CI
 7. 构建好的程序会存在workspace文件夹中
+8. go get github.com/mattn/go-sqlite3需要预安装gcc, 必要时使用"sudo apt-get install build-essential"命令安装
 
 ### REST API
 
@@ -76,11 +77,10 @@
 
 ```json
 {
-  
+
 }
 ```
 
 ### Next
 
 - Web GUI 支持
-
